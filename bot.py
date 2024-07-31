@@ -50,7 +50,8 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if query.data in ['fragile_yes', 'fragile_no']:
         context.user_data['is_fragile'] = query.data == 'fragile_yes'
         await query.edit_message_text(
-        text="Выберите тип предмета:\n!!!Важно, если вы заказываете чайник, то выбирайте тип \"Большой\" и вводите вес 0.5!!!", 
+        text="Выберите тип предмета:\n<b><i>Важно, если вы заказываете чайник, то выбирайте тип \"Большой\" и вводите вес 0.5</i></b>", 
+        parse_mode='HTML',
         reply_markup=InlineKeyboardMarkup([
             [InlineKeyboardButton("Малый", callback_data='small')],
             [InlineKeyboardButton("Средний", callback_data='medium')],
