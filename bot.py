@@ -49,11 +49,14 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     if query.data in ['fragile_yes', 'fragile_no']:
         context.user_data['is_fragile'] = query.data == 'fragile_yes'
-        await query.edit_message_text(text="Выберите тип предмета:", reply_markup=InlineKeyboardMarkup([
+        await query.edit_message_text(
+        text="Выберите тип предмета:\n!!!Важно, если вы заказываете чайник, то выбирайте тип \"Большой\" и вводите вес 0.5!!!", 
+        reply_markup=InlineKeyboardMarkup([
             [InlineKeyboardButton("Малый", callback_data='small')],
             [InlineKeyboardButton("Средний", callback_data='medium')],
             [InlineKeyboardButton("Большой", callback_data='large')]
-        ]))
+        ])
+)
     elif query.data in ['small', 'medium', 'large']:
         context.user_data['item_type'] = query.data
         if query.data == 'large':
@@ -106,7 +109,6 @@ async def calculate_and_send_result(update: Update, context: ContextTypes.DEFAUL
 
     context.user_data.clear()
 
-# Основная функция
 def main() -> None:
     application = Application.builder().token(TOKEN).build()
     
